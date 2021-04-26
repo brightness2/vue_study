@@ -1,0 +1,49 @@
+<!--
+ * @Author: Brightness
+ * @Date: 2021-04-26 16:05:22
+ * @LastEditors: Brightness
+ * @LastEditTime: 2021-04-26 16:10:56
+ * @Description:  
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>live</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data () {
+                return {
+                    num:0
+                }
+            },
+            beforeCreate () {
+                console.log('beforeCreate');
+            },
+            created () {
+                console.log('created');
+            },
+            beforeMount () {
+                console.log('beforeMount');
+            },
+            mounted () {
+                console.log('mounted');
+            },
+            beforeUpdate () {
+                console.log('beforeUpdate');
+            },
+            updated () {
+                console.log('update');
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

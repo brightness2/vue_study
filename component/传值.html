@@ -1,0 +1,77 @@
+<!--
+ * @Author: Brightness
+ * @Date: 2021-04-26 15:49:16
+ * @LastEditors: Brightness
+ * @LastEditTime: 2021-04-26 17:50:16
+ * @Description:  
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传值</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+//单项数据流的限制，子组件不能直接修改父组件的数据，通过方法调用修改父组件数据
+        var child = {
+            props: {
+               name:{
+                   type:String,
+                   require:true,
+                   default:'name',
+                   validator:function(value){
+                       return value.search('Brightness') != -1
+                   }
+               }
+            },
+            emits: ['add'],//声明add方法
+            //可以对参数进行校验
+            // emits:{
+            //     add: (value) => {
+            //         return value < 20 ? true : false
+            //     }
+            // }
+            template:`局部组件(子组件)
+                <div>name：{{name}}</div>
+                <button @click="handelClick">子组件按钮</button>
+            `,
+            methods: {
+                handelClick(){
+                    this.$emit('add',2)//调用父组件的handelAdd，参数是2
+                }
+            }
+        };
+       const app =  Vue.createApp({
+            template: `<div>
+                <div>父组件数据 {{parentData}} </div>
+              <child :name="name" @add='handelAdd'></child>
+            </div>`,
+            data () {
+                return {
+                    parentData:0,
+                    name:'Brightness ',
+                }
+            },
+            components:{
+                child
+            },
+            methods: {
+                handelAdd:function(v){
+                    this.parentData +=v;
+                }
+            }
+
+        })
+        
+       
+        
+        app.mount("#app")
+    </script>
+</body>
+</html>
