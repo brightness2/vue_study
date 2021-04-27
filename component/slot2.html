@@ -1,0 +1,77 @@
+<!--
+ * @Author: Brightness
+ * @Date: 2021-04-27 11:25:23
+ * @LastEditors: Brightness
+ * @LastEditTime: 2021-04-27 11:50:24
+ * @Description:  
+-->
+<!--
+ * @Author: Brightness
+ * @Date: 2021-04-27 08:36:08
+ * @LastEditors: Brightness
+ * @LastEditTime: 2021-04-27 11:26:24
+ * @Description:  
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插槽props 传递数据</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let child = {
+            props: ['name'],
+            data () {
+                return {
+                    
+                    slotData:'子组件数据项'
+                }
+            },
+            template:`
+                <div>子组件</div>
+                <div>
+                    <slot  :data="slotData"></slot>
+                    
+                </div>
+            `,
+           
+            methods: {
+                
+            }
+        }
+
+
+       
+
+        let app = Vue.createApp({
+            template:`
+                <div>
+                    <h2>父组件</h2>
+                    <child v-slot='props'>
+                       {{props.data}}
+                    </child>
+                   
+                </div>
+                    
+
+            `,
+            data () {
+                return {
+                    parentData:'父组件数据项'
+                }
+            },
+            components: {
+                child,
+               
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

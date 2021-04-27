@@ -1,0 +1,61 @@
+<!--
+ * @Author: Brightness
+ * @Date: 2021-04-27 14:35:47
+ * @LastEditors: Brightness
+ * @LastEditTime: 2021-04-27 16:08:55
+ * @Description:  
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+   
+    <div id="app"></div>
+    <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.0/animate.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let app = Vue.createApp({
+            template:`
+                <div>
+                  
+                    <!-- 过渡 的使用 -->
+                    <transition 
+                    mode="out-in"
+                    name="custom-classes-transition"
+                    enter-active-class="animate__animated animate__tada"
+                    leave-active-class="animate__animated animate__bounceOutRight">
+                        <div v-if="show" key='div1'>transition 标签使用</div>
+                        <div v-else key="div2">使用 animate.css</div>
+
+                    </transition>
+                    <button @click="showEl">点击触发transition</button>
+                </div>
+            `,
+            data () {
+                return {
+                    show:false,
+                    
+                }
+            },
+            methods: {
+                
+                showEl(){
+                    this.show = !this.show
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

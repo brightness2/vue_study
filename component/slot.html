@@ -1,0 +1,90 @@
+<!--
+ * @Author: Brightness
+ * @Date: 2021-04-27 08:36:08
+ * @LastEditors: Brightness
+ * @LastEditTime: 2021-04-27 11:26:24
+ * @Description:  
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slot</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let child = {
+            props: ['name'],
+            data () {
+                return {
+                    
+
+                }
+            },
+            template:`
+                <div>子组件</div>
+                <div>
+                    <slot name="one">插槽1默认值</slot>
+                    <br/>
+                   
+                        <slot name="two"  >插槽2默认值</slot>
+                   
+
+                </div>
+            `,
+           
+            methods: {
+                
+            }
+        }
+
+
+        let child2 = {
+            template:`
+                <div>子组件2 ,插槽中使用</div>
+            `
+        }
+
+        let app = Vue.createApp({
+            template:`
+                <div>
+                    <h2>父组件</h2>
+                    <child></child>
+                    <br/>
+                    <child>
+                        <template #one>父组件填充的插槽数据,{{parentData}}</template>
+                        <template #two>插槽可以填充父组件的动态数据,以及其它子组件</template>
+
+                    </child>
+                    <br/>
+                    <child >
+                        <template #one >one 插槽</template>
+                        <template #two  >
+                            <child2></child2>
+                           
+                        </template>
+                         
+                    </child>
+                </div>
+                    
+
+            `,
+            data () {
+                return {
+                    parentData:'父组件数据项'
+                }
+            },
+            components: {
+                child,
+                child2
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

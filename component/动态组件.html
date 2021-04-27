@@ -1,0 +1,83 @@
+<!--
+ * @Author: Brightness
+ * @Date: 2021-04-27 12:34:42
+ * @LastEditors: Brightness
+ * @LastEditTime: 2021-04-27 13:04:03
+ * @Description:  
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件-状态保持与异步</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+
+        let child = {
+            template:`
+                <div>
+                    子组件1
+                </div>
+            `
+        }
+
+        let child2 = {
+            template:`
+                <div>
+                    子组件2
+                    <input/>
+                </div>
+            `
+        }
+
+        
+      
+        let app = Vue.createApp({
+            template:`
+                <div>
+                    <h2>父组件</h2>
+                    <button @click='change'>切换组件</button>
+                    <keep-alive>
+                    <component :is='temp' />
+                    </keep-alive>
+                    <async-component></async-component>
+                </div>
+            `,
+            data () {
+                return {
+                    temp:'child'
+                }
+            },
+            components: {
+                child,
+                child2,
+                // 'my-component': () => import('./my-async-component'),//局部注册异步组件
+            },
+            methods: {
+                change(){
+                    this.temp = this.temp === 'child'?'child2':'child'
+                }
+            }
+        })
+
+        app.component('async-component',Vue.defineAsyncComponent(()=>{
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve({
+                        template:`<div>这是一个异步组件</div>`
+                    })
+                },3000)
+            })
+
+        }))
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!--
+ * @Author: Brightness
+ * @Date: 2021-04-27 13:32:19
+ * @LastEditors: Brightness
+ * @LastEditTime: 2021-04-27 13:49:13
+ * @Description:  
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多级组件props传递</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        
+
+        let child2 = {
+            inject:['parentdata'],
+            template:`
+                <div>
+                    二级子组件
+                    <span>
+                      父组件数据  {{parentData}}
+                      
+                    </span>
+                </div>   
+            `,
+        }
+
+        let child = {
+            template:`
+                <div>
+                    一级子组件
+                    <child2></child2>
+                </div>
+            `,
+            components: {
+                child2
+            }
+        }
+
+        let app = Vue.createApp({
+            template:`
+                <div>
+                    父组件
+                    <child></child>
+                </div>
+            `,
+            provide:{
+                parentdata:'父组件数据'
+            },
+            components:{
+                child
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

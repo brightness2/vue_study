@@ -1,0 +1,81 @@
+
+<!--
+ * @Author: Brightness
+ * @Date: 2021-04-27 08:36:08
+ * @LastEditors: Brightness
+ * @LastEditTime: 2021-04-27 12:03:21
+ * @Description:  
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插槽props 多插槽多参数传递</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let child = {
+            props: ['name'],
+            data () {
+                return {
+                    
+                    slotData:'子组件数据项',
+                    data2:'第二个prop属性数据'
+                }
+            },
+            template:`
+                <div>子组件</div>
+                <div>
+                    <slot name="one" :data="slotData" :data2='data2'></slot>
+                    <slot name="two"  :data="slotData"></slot>
+
+                    
+                </div>
+            `,
+           
+            methods: {
+                
+            }
+        }
+
+
+       
+
+        let app = Vue.createApp({
+            template:`
+                <div>
+                    <h2>父组件</h2>
+                    <child >
+                        <template  #one='props1'>
+                            插槽1 {{props1.data}},{{props1.data2}}
+                            <br/>
+                        </template>
+                        
+                        <template  #two='props2'>
+                            插槽2 {{props2.data}}
+                        </template>
+                    </child>
+                   
+                </div>
+                    
+
+            `,
+            data () {
+                return {
+                    parentData:'父组件数据项'
+                }
+            },
+            components: {
+                child,
+               
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>
