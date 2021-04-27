@@ -2,11 +2,11 @@
  * @Author: Brightness
  * @Date: 2021-04-25 18:58:50
  * @LastEditors: Brightness
- * @LastEditTime: 2021-04-27 16:08:34
+ * @LastEditTime: 2021-04-27 16:15:04
  * @Description:vue相关
 -->
 
-## 基础知识列表
+# 基础知识列表
 
 1、 Vue.createApp() 创建 vue 对象
 
@@ -27,7 +27,7 @@ stop,prevent,capture,self,once,passive;
 enter 、tab、delete、esc、up 、down、left、right;如：@keydown.enter
 left、right、middle;如：@click.right
 
-## 组件 知识点列表
+# 组件 知识点列表
 
 1、Vue.component()全局组件,components 属性注册局部组件
 
@@ -55,14 +55,14 @@ components: {
 9、数据在多级组件中传递
 父组件 provide 定义数据,子组件 inject 接收数据,当然可以定义多个数据和接收多个数据
 
-## 动画与过渡
+# 动画与过渡
 
-# 动画和过渡的区别
+## 动画和过渡的区别
 
 动画：一个 DOM 元素，从一个地方移到另一个地方，这种效果叫做动画。比如一个层从浏览器的左侧移动到右侧，这就是动画。
 过渡：是 DOM 元素中的一个属性，缓慢的变成另一个属性，这种效果叫做过渡效果。比如一个层从红色慢慢变成黄色，这种就是过渡。
 
-# 知识列表
+## 知识列表
 
 1、过渡 class
 
