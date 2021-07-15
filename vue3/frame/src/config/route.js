@@ -2,12 +2,12 @@
  * @Author: Brightness
  * @Date: 2021-07-14 11:12:00
  * @LastEditors: Brightness
- * @LastEditTime: 2021-07-14 12:12:24
+ * @LastEditTime: 2021-07-15 08:57:22
  * @Description:  路由配置
  */
 import Home from '@/view/Home.vue'
 const routeConfig ={
-    history:'hash',//hash 或 history
+    mode:'hash',//hash 或 history
     routes:[
         {
             path:'/',
